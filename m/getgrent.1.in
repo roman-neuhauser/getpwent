@@ -1,0 +1,119 @@
+.\" vim: tw=72 fdm=marker cms=.\\"\ %s
+.
+.\" FRONT MATTER {{{
+.Dd Dec 15, 2016
+.Os
+.Dt GETGRENT 1
+.
+.Sh NAME
+.Nm getgrent
+.Nd Display group(5) info for a group
+.\" FRONT MATTER }}}
+.
+.\" SYNOPSIS {{{
+.Sh SYNOPSIS
+.Nm
+. Fl h | \-help
+.Nm
+. Op Fl Nq
+. Fl t Ar USER
+. Ar GROUP
+.Nm
+. Op Fl FNgmnpq
+. Ar GROUP
+.\" SYNOPSIS }}}
+.
+.\" DESCRIPTION {{{
+.Sh DESCRIPTION
+.Nm
+displays information about
+.Ar USER
+gleaned from
+.Pa /etc/passwd
+and
+.Pa /etc/group .
+.\" }}}
+.
+.\" OPTIONS {{{
+.Sh OPTIONS
+.Bl -tag -width xx
+.It Fl h
+Help.
+Display usage information.
+.It Fl F
+Fields.
+Omit field names from output.
+.It Fl N
+Numeric.
+. Ar USER
+and
+. Ar GROUP
+are user and group ids, not names.
+.It Fl g
+Group id.
+Display group id.
+.It Fl m
+Members.
+Display group members.
+.It Fl n
+Group name.
+Display group name.
+.It Fl p
+Password.
+Display encrypted password.
+.It Fl q
+Quiet.
+No error message for nonexistent
+. Ar GROUP
+or
+. Ar USER .
+.It Fl t Ar USER
+Test.
+Test whether
+. Ar USER
+is in
+. Ar GROUP .
+.El
+.\" }}}
+.
+.\" EXIT STATUS {{{
+.Sh EXIT STATUS
+.Ex -std
+.\" }}}
+
+.\" EXAMPLES {{{
+.Sh EXAMPLES
+List members of the group named
+.Dq wheel :
+.
+.Bd -literal -offset xx
+$ getgrent -m wheel
+members=2
+member_0=root
+member_1=roman
+.Ed
+.\" }}}
+.
+.\" SEE ALSO {{{
+.Sh SEE ALSO
+.Xr getent 1 ,
+.Xr getpwent 1 ,
+.Xr homeof 1 ,
+.Xr id 1 ,
+.Xr getgrent 3 ,
+.Xr getpwent 3 ,
+.Xr group 5 ,
+.Xr passwd 5 .
+.\" }}}
+.
+.\" AUTHORS {{{
+.Sh AUTHORS
+.An Roman Neuhauser Aq Mt rneuhauser+getpwent@sigpipe.cz
+.\" AUTHORS }}}
+.
+.\" BUGS {{{
+.Sh BUGS
+No doubt plentiful.
+Please report them at
+.Lk https://github.com/roman-neuhauser/getpwent/issues
+.\" BUGS }}}

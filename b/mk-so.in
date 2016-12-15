@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -eu
+
+LD="@LD@"
+LDFLAGS="@LDFLAGS@"
+ofile="$1"
+shift
+
+exec $LD $LDFLAGS -o $ofile "$@"

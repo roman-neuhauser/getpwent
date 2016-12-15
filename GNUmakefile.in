@@ -1,0 +1,47 @@
+bindir      = @bindir@
+mandir      = @mandir@
+man1dir     = $(mandir)/man1
+
+rootdir = @rootdir@
+smandir = $(rootdir)/m
+pkgdir  = $(rootdir)/p
+srcdir  = $(rootdir)/s
+testdir = $(rootdir)/t
+
+tests   = $(testdir)
+
+INSTALL = install
+LN = ln
+
+.PHONY: all
+all: getpwent getgrent fakegr.so fakepw.so
+
+.PHONY: check
+check: $(tests) | all
+	./runtests $^
+
+.PHONY: clean
+clean:
+	$(RM) *.html *.o *.so getpwent getgrent
+
+.PHONY: pristine
+pristine:
+	$(RM) $(strip $(file <$(rootdir)/.gitignore))
+
+.PHONY: html
+html: README.html
+
+%.html: %.rst
+	./rst2html $< $@
+
+getgrent getpwent: %: %.o
+	$(CC) -o $@ $<
+
+fakegr.so: fakegr.o
+	./mk-so $@ $<
+
+fakepw.so: fakepw.o
+	./mk-so $@ $<
+
+%.o: $(srcdir)/%.c
+	./compile $@ $<

@@ -1,0 +1,4 @@
+set -u
+
+export LD_PRELOAD="$BUILDDIR/fakegr.so:$BUILDDIR/fakepw.so"
+export PATH=$BUILDDIR:$PATH

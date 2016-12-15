@@ -1,0 +1,121 @@
+#!/bin/sh
+# vim: sts=2 sw=2 et fdm=marker cms=\ #\ %s
+
+findtool() # {{{
+{
+  local val= varval= var="$1"; shift
+  eval "varval=\"\$$var\""
+  if test -n "$varval"; then
+    val=$(which $varval 2>/dev/null || :)
+  fi
+  while test -z "$val" && test "${1+set}" = set; do
+    test -z "$1" ||
+      val=$(which "$1" 2>/dev/null || :)
+    shift
+  done
+  test -n "$val" || {
+    echo >&2 "not found: $var"
+    exit 1
+  }
+  test -x "$val" || {
+    echo >&2 "not executable: $var ($val)"
+    exit 1
+  }
+  eval "$var=\"\$val\""
+} # }}}
+
+mksubstvars() # {{{
+{
+  local f=substvars
+  cat > "$f" <<-EOF
+	#!/bin/sh
+	exe=false
+	if [ "x\$1" = x-x ]; then
+	  exe=true
+	  shift
+	fi
+	if [ \$# -lt 2 ]; then
+	  src="$rootdir/\${1?}"
+	  dst="\${1%.in}"; dst="\${dst##*/}"
+	else
+	  dst="\$1"; shift
+	  src="\$*"
+	fi
+
+	prefix="$prefix"
+	datarootdir="$datarootdir"
+
+	sed \\
+	  -e "s@rootdir@$rootdirg" \\
+	  -e "s@bindir@$bindirg" \\
+	  -e "s@mandir@$mandirg" \\
+	  -e "s@prefix@$prefixg" \\
+	  -e "s@pkgname@$pkgnameg" \\
+	  -e "s@CC@$CCg" \\
+	  -e "s@CFLAGS@$CFLAGSg" \\
+	  -e "s@LD@$LDg" \\
+	  -e "s@LDFLAGS@$LDFLAGSg" \\
+	  -e "s@CRAM@$CRAMg" \\
+	  -e "s@CRAMFLAGS@$CRAMFLAGSg" \\
+	  -e "s@RST2HTML@$RST2HTMLg" \\
+	  -e "s@RST2HTMLFLAGS@$RST2HTMLFLAGSg" \\
+	  "\$src" \\
+	> "\$dst"
+	if \$exe; then
+	  chmod +x "\$dst"
+	fi
+EOF
+  chmod +x $f
+} # }}}
+
+rootdir=$(dirname $0)
+
+pkgname=getpwent
+
+prefix=/usr/local
+bindir='${prefix}/bin'
+datarootdir='${prefix}/share'
+mandir='${datarootdir}/man'
+sysconfdir_set=0
+
+CFLAGS="-O0 -g -fPIC -Wall -Wextra -Werror -Wno-unused -Wno-unused-parameter"
+LDFLAGS=-shared
+
+for a in "$@"; do
+  case $a in
+  --bindir=*)       bindir="${a#*=}"      ;;
+  --controlpathdir=*)
+    controlpathdir="${a#*=}"
+  ;;
+  --mandir=*)       mandir="${a#*=}"      ;;
+  --prefix=*)       prefix="${a#*=}"      ;;
+
+  CC=*)             CC="${a#*=}"          ;;
+  CFLAGS=*)         CFLAGS="${a#*=}"      ;;
+
+  LDC=*)            LDC="${a#*=}"         ;;
+  LDFLAGS=*)        LDFLAGS="${a#*=}"     ;;
+
+  CRAM=*)           CRAM="${a#*=}"        ;;
+  CRAMFLAGS=*)      CRAMFLAGS="${a#*=}"   ;;
+
+  RST2HTML=*)       RST2HTML="${a#*=}"    ;;
+  RST2HTMLFLAGS=*)  RST2HTMLFLAGS="${a#*=}" ;;
+  esac
+done
+
+findtool CC cc
+findtool LD cc
+findtool CRAM cram
+findtool GIT git
+findtool RST2HTML rst2html5 rst2html
+
+mksubstvars
+
+./substvars -x b/compile.in
+./substvars -x b/mk-so.in
+./substvars -x b/rst2html.in
+./substvars -x b/runtests.in
+./substvars -x b/substver.in
+
+./substvars GNUmakefile.in

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -eu
+
+testroot="@rootdir@/t" # FIXME: don't hardcode "/t" here?
+cram="@CRAM@"
+: ${CRAMFLAGS="@CRAMFLAGS@"}
+
+test $# -gt 0 || set -- "$testroot"
+
+env -i \
+  PATH="$PATH" \
+  TESTROOT="$testroot" \
+  BUILDDIR="$PWD" \
+  $cram \
+  $CRAMFLAGS \
+  "$@"

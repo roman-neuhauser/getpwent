@@ -1,0 +1,15 @@
+GNUmakefile
+README.html
+compile
+fakegr.so
+fakepw.so
+getgrent
+getpwent
+mk-so
+rst2html
+runtests
+substvars
+substver
+*.o
+t/*.err
+t/*.orig
