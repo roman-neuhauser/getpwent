@@ -1,0 +1,102 @@
+.\" vim: tw=72 fdm=marker cms=.\\"\ %s
+.
+.\" FRONT MATTER {{{
+.Dd Dec 15, 2016
+.Os
+.Dt GETPWENT 1
+.
+.Sh NAME
+.Nm getpwent
+.Nd Display passwd(5) and groups(5) info for a user
+.\" FRONT MATTER }}}
+.
+.\" SYNOPSIS {{{
+.Sh SYNOPSIS
+.Nm
+. Fl h | \-help
+.Nm
+. Op Fl Ncdgnprsux
+. Ar NAME
+.\" SYNOPSIS }}}
+.
+.\" DESCRIPTION {{{
+.Sh DESCRIPTION
+.Nm
+displays information about the user
+.Ar NAME
+gleaned from
+.Pa /etc/passwd
+and
+.Pa /etc/group .
+.\" }}}
+.
+.\" OPTIONS {{{
+.Sh OPTIONS
+.Bl -tag -width xx
+.It Fl h
+Display usage information.
+.It Fl N
+Omit field names from output.
+.It Fl c
+Display login class.
+.It Fl d
+Display home directory.
+.It Fl g
+Display primary group id.
+.It Fl n
+Display user name.
+.It Fl p
+Display encrypted password.
+.It Fl r
+Display password change date.
+.It Fl s
+Display login shell.
+.It Fl u
+Display user id.
+.It Fl x
+Display account expiration date.
+.El
+.\" }}}
+.
+.\" EXIT STATUS {{{
+.Sh EXIT STATUS
+.Ex -std
+.\" }}}
+
+.\" EXAMPLES {{{
+.Sh EXAMPLES
+Display the minimal set of fields prescribed by
+.St -p1003.1-2013 :
+.
+.Bd -literal -offset xx
+$ getpwent -dgnsu root
+name=root
+uid=0
+gid=0
+dir=/root
+shell=/bin/csh
+.Ed
+.\" }}}
+.
+.\" SEE ALSO {{{
+.Sh SEE ALSO
+.Xr getent 1 ,
+.Xr homeof 1 ,
+.Xr id 1 ,
+.Xr getgrgid 3 ,
+.Xr getpwnam 3 ,
+.Xr group 5 ,
+.Xr passwd 5 .
+.\" }}}
+.
+.\" AUTHORS {{{
+.Sh AUTHORS
+.An Roman Neuhauser Aq Mt rneuhauser+getpwent@sigpipe.cz
+.\" AUTHORS }}}
+.
+.\" BUGS {{{
+.Sh BUGS
+No doubt plentiful.
+Please report them at
+.Lk https://github.com/roman-neuhauser/getpwent/issues
+.\" BUGS }}}

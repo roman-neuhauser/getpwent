@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -eu
+
+rst2html="@RST2HTML@"
+: ${RST2HTMLFLAGS="@RST2HTMLFLAGS@"}
+
+env -i \
+  "$rst2html" \
+  $RST2HTMLFLAGS \
+  "$@"

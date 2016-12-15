@@ -1,0 +1,3 @@
+set -u
+
+export PATH=$BUILDDIR:$PATH

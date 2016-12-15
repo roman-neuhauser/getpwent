@@ -1,0 +1,26 @@
+setup::
+
+  $ test $(uname -s) = FreeBSD || exit 80
+
+  $ . $TESTDIR/setup
+
+
+help::
+
+  $ getgrent -h
+  usage: getgrent -h
+  usage: getgrent [-q] -t USER GROUP
+  usage: getgrent [options] GROUP
+  
+  Display groups(5) info for a group
+  
+    Options:
+      -h                Display this message
+      -N                Omit field names from output
+      -g                Display group id
+      -n                Display group name
+      -p                Display encrypted password
+      -q                No error message for nonexistent GROUP or USER
+      -t USER           Test whether USER in is GROUP
+    Operands:
+      GROUP             Display information for group GROUP

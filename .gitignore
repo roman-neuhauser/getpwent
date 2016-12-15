@@ -1,0 +1,12 @@
+GNUmakefile
+compile
+fakegr.so
+fakepw.so
+getgrent
+getpwent
+git-versionstring
+mk-so
+mktarball
+rst2html
+runtests
+substver

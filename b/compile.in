@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -eu
+
+CC="@CC@"
+CFLAGS="@CFLAGS@"
+ofile="$1"
+shift
+
+exec $CC -c $CFLAGS -o $ofile "$@"
