@@ -30,6 +30,7 @@ usage(int ex)
     "    -h                Display this message\n"
     "    -N                Omit field names from output\n"
     "    -g                Display group id\n"
+    "    -m                Display group members\n"
     "    -n                Display group name\n"
 #ifdef __FreeBSD__
     "    -p                Display encrypted password\n"

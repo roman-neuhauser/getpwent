@@ -18,6 +18,7 @@ help::
       -h                Display this message
       -N                Omit field names from output
       -g                Display group id
+      -m                Display group members
       -n                Display group name
       -p                Display encrypted password
       -q                No error message for nonexistent GROUP or USER

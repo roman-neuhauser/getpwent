@@ -61,6 +61,7 @@ Usage
       -h                Display this message
       -N                Omit field names from output
       -g                Display group id
+      -m                Display group members
       -n                Display group name
       -p                Display encrypted password
       -q                No error message for nonexistent GROUP or USER
@@ -69,8 +70,8 @@ Usage
       GROUP             Display information for group GROUP
 
 
-Example
-=======
+Examples
+========
 
 Display the minimal set of fields prescribed by
 IEEE Std 1003.1-2008/Cor 1-2013 (“POSIX.1”), for
@@ -82,6 +83,14 @@ the user named `root`::
   gid=0
   dir=/root
   shell=/bin/csh
+
+
+List members of the group named `wheel`::
+
+  $ getgrent -m wheel
+  members=2
+  member_0=root
+  member_1=roman
 
 
 License
