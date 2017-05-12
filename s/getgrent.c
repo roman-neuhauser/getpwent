@@ -129,7 +129,7 @@ main(int argc, char **argv)
         exit(0);
     exit(1);
   }
-  // output in field order in passwd(5)
+  // output in field order in group(5)
   if (is_on(opts, 'n')) field(gr, "%s", name);
   if (is_on(opts, 'p')) field(gr, "%s", passwd);
   if (is_on(opts, 'g')) field(gr, "%d", gid);
