@@ -1,7 +1,5 @@
 setup::
 
-  $ test $(uname -s) = FreeBSD || exit 80
-
   $ . $TESTDIR/setup
 
   $ export FAKEGR_name=fubar
