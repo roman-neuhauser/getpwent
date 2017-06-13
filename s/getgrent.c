@@ -28,6 +28,7 @@ usage(int ex)
     "\n"
     "  Options:\n"
     "    -h                Display this message\n"
+    "    -I                Query by group id\n"
     "    -N                Omit field names from output\n"
     "    -g                Display group id\n"
     "    -m                Display group members\n"

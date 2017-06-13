@@ -15,8 +15,8 @@
 .Nm
 . Fl h | \-help
 .Nm
-. Op Fl Ncdgnprsux
-. Ar NAME
+. Op Fl INcdgnprsux
+. Ar USER
 .\" SYNOPSIS }}}
 .
 .\" DESCRIPTION {{{
@@ -35,6 +35,8 @@ and
 .Bl -tag -width xx
 .It Fl h
 Display usage information.
+.It Fl I
+Query by user id.
 .It Fl N
 Omit field names from output.
 .It Fl c

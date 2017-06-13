@@ -27,6 +27,7 @@ usage(int ex)
     "\n"
     "  Options:\n"
     "    -h                Display this message\n"
+    "    -I                Query by user id\n"
     "    -N                Omit field names from output\n"
 #ifdef __FreeBSD__
     "    -c                Display login class\n"

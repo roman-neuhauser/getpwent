@@ -15,6 +15,7 @@ help::
   
     Options:
       -h                Display this message
+      -I                Query by user id
       -N                Omit field names from output
       -c                Display login class
       -d                Display home directory
